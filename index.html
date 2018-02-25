@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Todo List App</title>
+	<link href="css/style.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+</head>
+
+<body ng-app="todoListApp">
+		
+	<div class="mainContainer">
+		
+		<div class="appNav">
+			
+			<h1>dairy app</h1>
+			<p>Comment with no sense</p>
+			
+		</div> <!-- appNav -->
+		
+		<div ng-controller="mainCtrl" class="appContainer">
+			
+			<div class="itemsContainer">
+				
+				<h2 class="sharedHeading">Items</h2>
+				<div class="formCreate">
+					<input class="newTodo" type="text" placeholder="Type name here..." autofocus ng-model="inputText">
+					<button class="createBtn" type="button" ng-click="addTodo()">Add new</button>
+				</div> <!-- formCreate end -->
+				
+				<ul class="todoList">
+					<li ng-repeat="todos in data.todos track by $index" ng-class="{'todoIsActive': $index == selectedIndex}" ng-click="itemSelected($index)">
+						<label>{{todos.name}}</label>
+						<span class="commentsAmount">{{todos.comments.length}}</span>
+						<button class="deleteBtn" type="button" ng-click="removeTodo($index)">Delete</button>
+					</li>
+				</ul> <!-- todoList end -->
+				
+			</div> <!-- itemsContainer end -->
+			
+			<div class="commentsContainer">
+				
+				<h2 class="sharedHeading">Comments #<span>{{itemNumber}}</span></h2>
+				<div class="commentsBlock">
+				
+					<div class="comment" ng-repeat="items in comments track by $index">
+						<span class="imageLike"></span>
+						<p class="commentText">{{items}}</p>
+					</div>
+					
+					<div class="addNewComment" ng-keypress="addNewComment($event)">
+						
+						<span class="imageLike"></span>
+						<textarea ng-model="newComment"></textarea>
+						
+					</div> <!-- addNewComment end -->
+					
+				</div> <!-- commentsBlock end -->
+				
+			</div> <!-- mainContainer end -->
+			
+		</div> <!-- appContainer end -->
+		
+	</div> <!-- mainContainer end -->
+	
+	<script src="js/app.js"></script>
+	
+</body>
+</html>
